@@ -1,0 +1,14 @@
+<%# res.locals.user which is given by the pass-user-to-view file means that user can be used in all views
+logged out the user is undefined, logged in the user is _id, username %>
+
+<nav>
+    <a href="/">Home</a>
+    <% if (user) { %>
+    <%# each user goes to their own pantry with their logged in userId%>
+    <a href="/users/<%=user._id%>/foods">View my Pantry</a>
+    <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+        <a href="/auth/sign-in">Sign in</a>
+        <a href="/auth/sign-out">Sign Out</a>
+    <% } %>
+</nav>
