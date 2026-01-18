@@ -8,6 +8,8 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 const authController = require('./controllers/auth.js')
 const foodsController = require('./controllers/food.js');
+const methodOverride = require('method-override');
+
 
 //req.body will be undefined without this code (how express users client data from forms e.g. sign up form)
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +26,7 @@ app.set('view engine', 'ejs');
 //add auth controller before isSignedin to prevent the middleware running before the /auth routes
 //creates a redirect loop so the view never renders
 app.use('/auth', authController);
+app.use(methodOverride('_method'));
 app.use(isSignedIn);
 
 // Use relative paths so Node resolves local files correctly
